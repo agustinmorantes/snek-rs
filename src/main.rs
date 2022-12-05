@@ -15,8 +15,7 @@ fn main() {
 
     execute!(
         stdout(),
-        terminal::Clear(terminal::ClearType::All),
-        PushKeyboardEnhancementFlags(KeyboardEnhancementFlags::DISAMBIGUATE_ESCAPE_CODES)
+        terminal::Clear(terminal::ClearType::All)
     )
     .unwrap();
 
@@ -102,7 +101,7 @@ fn spawn_food(screen: &mut Screen) {
 }
 
 fn death(player: &Player) {
-    execute!(stdout(), PopKeyboardEnhancementFlags, cursor::Show).unwrap();
+    execute!(stdout(), cursor::Show).unwrap();
     disable_raw_mode().unwrap();
     panic!("You died! Final length: {}", player.len());
 }
@@ -132,7 +131,7 @@ fn read_input(dir: &mut (i8, i8)) {
 }
 
 fn quit_game() -> (i8, i8) {
-    execute!(stdout(), PopKeyboardEnhancementFlags, cursor::Show).unwrap();
+    execute!(stdout(), cursor::Show).unwrap();
     disable_raw_mode().unwrap();
     std::process::exit(0)
 }
